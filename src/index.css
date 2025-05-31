@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap");
+
+.light {
+    --bg: 248, 248, 248; /* #F8F8F8 */
+    --accent-light: 153, 150, 144; /* #999690 */
+    --primary: 151, 145, 140; /* #97918C */
+    --accent-dark: 133, 124, 121; /* #857C79 */
+    --secondary: 31, 29, 31; /* #1F1D1F */
+}
+
+.dark {
+    --bg: 240, 239, 239; /* #F0EFEF */
+    --accent-light: 130, 134, 138; /* #82868A */
+    --primary: 114, 112, 121; /* #727079 */
+    --accent-dark: 116, 115, 125; /* #74737D */
+    --secondary: 30, 31, 36; /* #1E1F24 */
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+}
