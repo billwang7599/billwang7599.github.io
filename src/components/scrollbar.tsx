@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export const Scrollbar = ({
     containerRef,
 }: {
-    containerRef: RefObject<HTMLDivElement>;
+    containerRef: RefObject<HTMLDivElement | null>;
 }) => {
     const scrollBarRef = useRef<HTMLDivElement>(null);
 

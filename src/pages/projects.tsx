@@ -96,7 +96,9 @@ export default function Projects() {
                 {projects.map((project, idx) => (
                     <div
                         key={project.title}
-                        ref={(el) => (cardsRef.current[idx] = el)}
+                        ref={(el) => {
+                            cardsRef.current[idx] = el;
+                        }}
                         className="bg-white backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg overflow-hidden border border-gray-300 hover:scale-110 transition-transform duration-300 flex flex-col"
                     >
                         <div className="w-full h-48 bg-gray-200 flex items-center justify-center overflow-hidden">

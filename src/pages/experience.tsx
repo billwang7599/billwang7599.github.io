@@ -81,7 +81,9 @@ export function Experience() {
                 {experiences.map((experience, index) => (
                     <div
                         key={index}
-                        ref={(el) => (cardsRef.current[index] = el)}
+                        ref={(el) => {
+                            cardsRef.current[index] = el;
+                        }}
                         className="relative z-10 bg-white rounded-xl shadow-xl p-8 w-full max-w-xl hover:scale-105 transition-transform duration-300"
                     >
                         <h3 className="text-3xl font-thin text-gray-700 mb-2">

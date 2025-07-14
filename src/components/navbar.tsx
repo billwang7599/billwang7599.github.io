@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 export type NavItems = {
     title: string;
-    ref: React.RefObject<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement | null>;
 };
 
 type NavbarProps = {
@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
                 )}
             >
                 <div className="flex items-center">
-                    <span className="ml-2 text-xl font-bold">B</span>
+                    <span className="ml-2 text-xl font-bold">BW</span>
                 </div>
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-4">
