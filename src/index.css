@@ -3,6 +3,17 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap");
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
 .light {
     --bg: 248, 248, 248; /* #F8F8F8 */
     --accent-light: 153, 150, 144; /* #999690 */
@@ -19,7 +30,20 @@
     --secondary: 30, 31, 36; /* #1E1F24 */
 }
 
-.page {
-    width: 100%;
-    height: 100%;
+.horizontal-container {
+    display: flex;
+    width: 300vw; /* Adjust based on number of sections */
+    height: 100vh;
+    overflow: hidden;
+}
+
+.horizontal-section {
+    width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+.after-horizontal {
+    height: 100vh;
+    background: #f5f5f5;
 }

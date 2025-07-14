@@ -1,90 +1,76 @@
+import Lenis from "lenis";
+import "lenis/dist/lenis.css";
 import { Hero } from "./pages/hero";
 import { Experience } from "./pages/experience";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { cn } from "./lib/cn";
+import Projects from "./pages/projects";
+import Contact from "./pages/contact";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import { Navbar, NavItems } from "./components/navbar";
+import { Scrollbar } from "./components/scrollbar";
 
-type Page = {
-    name: string;
-    component: JSX.Element;
-};
+// Initialize a new Lenis instance for smooth scrolling
+const lenis = new Lenis();
+
+// Register the ScrollTrigger plugin with GSAP
+gsap.registerPlugin(ScrollTrigger);
+
+// Synchronize Lenis scrolling with GSAP's ScrollTrigger plugin
+lenis.on("scroll", ScrollTrigger.update);
+
+// Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+// This ensures Lenis's smooth scroll animation updates on each GSAP tick
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+});
+
+// Disable lag smoothing in GSAP to prevent any delay in scroll animations
+gsap.ticker.lagSmoothing(0);
 
 function App() {
-    const [page, setPage] = useState(0);
-    const pages: Page[] = [
-        { name: "Hero", component: <Hero /> },
-        { name: "Experience", component: <Experience /> },
+    const homeRef = useRef<HTMLDivElement>(null);
+    const experienceRef = useRef<HTMLDivElement>(null);
+    const projectsRef = useRef<HTMLDivElement>(null);
+    const contactRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const navItems: NavItems[] = [
+        { title: "Home", ref: homeRef },
+        { title: "Experience", ref: experienceRef },
+        { title: "Projects", ref: projectsRef },
+        { title: "Contact", ref: contactRef },
     ];
 
     return (
-        <div className="w-screen h-screen overflow-hidden flex bg-bg text-secondary">
-            {pages.map((pageElement, index) => (
-                <>
-                    <motion.button
-                        className={cn(
-                            `flex items-center justify-center w-[4rem] h-full`,
-                            `${index === page ? "border-r border-dashed border-accent-light" : ""}`,
-                        )}
-                        onClick={() => setPage(index)}
-                        initial={false}
-                        whileHover={
-                            index === page
-                                ? {}
-                                : {
-                                      scale: 1.1,
-                                      backgroundColor: "transparent",
-                                      color: "rgba(var(--secondary))",
-                                  }
-                        }
-                        animate={{
-                            backgroundColor:
-                                index === page
-                                    ? "rgba(var(--bg))"
-                                    : "rgba(var(--accent-light))",
-                            color:
-                                index === page
-                                    ? "rgba(var(--secondary))"
-                                    : "rgba(var(--bg))",
-                        }}
-                        transition={{ duration: 0.5 }}
-                        disabled={index === page}
-                    >
-                        <span className="transform -rotate-90 whitespace-nowrap text-2xl font-bold">
-                            {pageElement.name}
-                        </span>
-                    </motion.button>
-                    <AnimatePresence>
-                        {index === page ? (
-                            <motion.div
-                                className="flex-grow h-full text-accent-dark overflow-hidden relative"
-                                initial={{ opacity: 0, width: "0%" }}
-                                animate={{ opacity: 1, width: "100%" }}
-                                exit={{ opacity: 0, width: "0%" }}
-                                transition={{
-                                    width: {
-                                        duration: 0.6,
-                                        ease: "easeInOut",
-                                    },
-                                    opacity: {
-                                        duration: 1,
-                                        ease: "easeInOut",
-                                    },
-                                }}
-                            >
-                                <div
-                                    className={`absolute left-0 top-0 h-full`}
-                                    style={{
-                                        width: `calc(100vw - ${pages.length * 4}rem)`,
-                                    }}
-                                >
-                                    {pageElement.component}
-                                </div>
-                            </motion.div>
-                        ) : null}
-                    </AnimatePresence>
-                </>
-            ))}
-        </div>
+        <>
+            <div
+                className="flex flex-col bg-bg text-secondary overflow-hidden"
+                ref={containerRef}
+            >
+                <Navbar navItems={navItems} />
+                <div ref={homeRef}>
+                    <Hero />
+                </div>
+                <div ref={experienceRef}>
+                    <Experience />
+                </div>
+                <div ref={projectsRef}>
+                    <Projects />
+                </div>
+                <div ref={contactRef}>
+                    <Contact />
+                </div>
+                <Scrollbar containerRef={containerRef} />
+            </div>
+            <footer className="w-full py-6 flex flex-col items-center border-t border-gray-200 bg-white bg-opacity-80 text-gray-500 text-sm">
+                <span>
+                    &copy; {new Date().getFullYear()} Bill Wang. All rights
+                    reserved.
+                </span>
+                <span>Built with React, GSAP, and Tailwind CSS.</span>
+            </footer>
+        </>
     );
 }
 

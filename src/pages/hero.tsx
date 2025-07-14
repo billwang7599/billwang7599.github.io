@@ -1,77 +1,138 @@
-import { Button } from "../components/ui/button";
-import { cn } from "../lib/cn";
-import bgImage from "../assets/bg.png";
+import bgImage from "../assets/china-bg.png";
+import cloudImage1 from "../assets/clouds1.png";
+import fgImage from "../assets/china-fg.png";
+import { gsap } from "gsap";
+import { useEffect, useRef } from "react";
 
 export function Hero() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const fgRef = useRef<HTMLDivElement>(null);
+    const bgRef = useRef<HTMLDivElement>(null);
+    const cloud1Ref = useRef<HTMLDivElement>(null);
+    const cloud2Ref = useRef<HTMLDivElement>(null);
+    const cloud3Ref = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (!containerRef.current || !fgRef.current!) return;
+
+        gsap.to(fgRef.current, {
+            y: "150%",
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: true,
+            },
+        });
+
+        gsap.to(bgRef.current, {
+            y: "-20%",
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom center",
+                scrub: true,
+            },
+        });
+
+        gsap.to(cloud2Ref.current, {
+            x: "-100px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom center",
+                scrub: true,
+            },
+        });
+
+        gsap.to(cloud3Ref.current, {
+            x: "150px",
+            ease: "none",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom center",
+                scrub: true,
+            },
+        });
+    }, []);
+
     return (
-        <section id="hero" className="page flex flex-row gap-4 w-full">
-            <div className="flex-auto flex-col w-full relative pt-4 md:pt-8 lg:pt-16 pr-[1rem]">
+        <div
+            id="hero"
+            className="flex flex-col w-full h-[150vh]"
+            ref={containerRef}
+        >
+            <div
+                className="flex-auto flex-col w-full relative z-10 h-[150vh]"
+                ref={bgRef}
+            >
                 {/* Background with blur effect */}
                 <div
                     className="absolute inset-0 z-0"
                     style={{
                         backgroundImage: `url(${bgImage})`,
                         backgroundSize: "cover",
-                        backgroundPosition: "center",
+                        backgroundPosition: "center 30%", // Position shifted to show more background
+                        transformOrigin: "center",
                         filter: "blur(0px)",
                     }}
                 ></div>
+                <div
+                    className="absolute inset-0 z-40"
+                    style={{
+                        backgroundImage: `url(${fgImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center 30%", // Position shifted to show more of the mountains
+                        transformOrigin: "center",
+                        filter: "blur(0px)",
+                    }}
+                ></div>
+                <div
+                    ref={cloud1Ref}
+                    className="absolute bottom-[-4rem] md:bottom-[-6rem] left-[-20vw] right-[-20vw] h-[20vh] z-50"
+                    style={{
+                        backgroundImage: `url(${cloudImage1})`,
+                        backgroundSize: "cover",
+                        filter: "blur(2px)",
+                        opacity: 1,
+                    }}
+                ></div>
+                <div
+                    ref={cloud2Ref}
+                    className="absolute bottom-[-10rem] md:bottom-[-12rem] left-[-20vw] right-[-20vw] h-[70vh] z-50"
+                    style={{
+                        backgroundImage: `url(${cloudImage1})`,
+                        backgroundSize: "cover",
+                        filter: "blur(2px)",
+                        opacity: 0.9,
+                    }}
+                ></div>
+                <div
+                    ref={cloud3Ref}
+                    className="absolute bottom-[-14rem] md:bottom-[-18rem] left-[-40vw] right-[-40vw] h-[100vh] z-50"
+                    style={{
+                        backgroundImage: `url(${cloudImage1})`,
+                        backgroundSize: "cover",
+                        filter: "blur(2px)",
+                        opacity: 0.8,
+                    }}
+                ></div>
                 {/* Content */}
-                <div className="flex flex-col relative z-10 mt-8 justify-right items-end">
-                    <h1 className="mb-4 tracking-loose text-8xl lg:text-24xl font-extrabold text-secondary [text-shadow:2px_2px_1px_black]">
+                <div
+                    className="flex flex-col relative z-10 items-end mt-[18vh] w-full p-8"
+                    ref={fgRef}
+                >
+                    <h1 className="w-full mb-4 tracking-loose text-7xl lg:text-8xl font-extrabold text-secondary [text-shadow:2px_2px_1px_black] text-center leading-none">
                         Bill Wang
                     </h1>
-                    <div className="flex flex-wrap gap-4">
-                        <Button>
-                            <a
-                                href="/resume.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Open Bill's résumé in a new tab"
-                            >
-                                Résumé
-                            </a>
-                        </Button>
-
-                        <Button>
-                            <a
-                                href="#contact"
-                                aria-label="Scroll to contact section"
-                            >
-                                Contact Me
-                            </a>
-                        </Button>
-                    </div>
+                    <h2 className="w-full mb-4 tracking-loose text-3xl lg:text-4xl font-light text-secondary [text-shadow:2px_2px_1px_black] text-center leading-none">
+                        王泽涛
+                    </h2>
                 </div>
             </div>
-            <div className="flex flex-col h-full w-full mt-[-10%]">
-                {Array.from({ length: 10 }).map((_, i) => (
-                    <h1
-                        key={i}
-                        className={cn(
-                            `w-full font-extrabold text-bg text-4xl lg:text-8xl`,
-                            i == 4
-                                ? "text-white/60 [text-shadow:1px_1px_1px_rgba(0,0,0,0.5)]"
-                                : "text-bg [text-shadow:1px_1px_0px_rgba(0,0,0,0.5)]",
-                        )}
-                    >
-                        <div className="lg:hidden">
-                            <span>Soft</span>
-                            <br></br>
-                            <span>ware</span>
-                            <br></br>
-                            <span>Eng</span>
-                            <br></br>
-                            <span>ineer</span>
-                        </div>
-                        <div className="hidden lg:block">
-                            <span>Software</span>
-                            <br></br>
-                            <span>Engineer</span>
-                        </div>
-                    </h1>
-                ))}
-            </div>
-        </section>
+        </div>
     );
 }
