@@ -3,11 +3,15 @@ name: Deploy Vite App to GitHub Pages
 on:
     push:
         branches:
-            - main # Trigger on pushes to the 'main' branch (or 'master', etc.)
+            - main
 
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
+
+        environment: # <--- ADD THIS SECTION
+            name: github-pages # <--- The name must be 'github-pages' for GitHub Pages deployments
+            url: ${{ steps.deployment.outputs.page_url }} # Optional, but good practice to link to the deployed URL
 
         steps:
             - name: Checkout code
@@ -16,7 +20,7 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: "18" # Use a Node.js version compatible with your project
+                  node-version: "18"
 
             - name: Install dependencies
               run: npm install
@@ -27,17 +31,13 @@ jobs:
             - name: Upload Pages artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: ./dist # Path to your built application (Vite's default)
+                  path: ./dist
 
             - name: Deploy to GitHub Pages
               id: deployment
               uses: actions/deploy-pages@v4
-              # With the `permissions` section below, you usually don't need a token
-              # but if you run into issues, uncomment the token line:
-              # with:
-              #   token: ${{ secrets.GITHUB_TOKEN }}
 
-permissions:
-    contents: read
-    pages: write
-    id-token: write # Required for `deploy-pages` to authenticate
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
