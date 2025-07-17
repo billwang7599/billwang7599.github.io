@@ -36,7 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ navItems }) => {
                     {navItems.map((item) => (
                         <button
                             key={item.title}
-                            className="text-md font-medium px-3 py-1 rounded hover:bg-gray-100 transition"
+                            className="text-md font-bold px-3 py-1 rounded text-gray-600 hover:text-gray-300 transition"
                             onClick={() => handleNavClick(item)}
                             type="button"
                         >
