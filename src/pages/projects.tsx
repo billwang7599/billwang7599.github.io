@@ -34,6 +34,13 @@ export default function Projects() {
             github: "https://github.com/billwang7599/CC3kPlus",
             image: "/projects/cc3kp.png",
         },
+        {
+            title: "EmotiBox",
+            description:
+                "A anonymous tip jar built on Slack using Slack API, Fastify, and Fast API.",
+            github: "https://github.com/billwang7599/EmotiBox",
+            image: "/projects/emotibox.png",
+        },
     ];
 
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
