@@ -1,11 +1,11 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { IconType } from "react-icons";
 import jadePendant from "../assets/jade-pendant.png";
 
 export default function Contact() {
     const pendantRef = useRef<HTMLImageElement>(null);
-    const buttonsRef = useRef<(HTMLAnchorElement | null)[]>([]);
 
     useEffect(() => {
         // Animate pendant entrance
@@ -16,19 +16,6 @@ export default function Contact() {
                 { opacity: 1, scale: 1, y: 0, duration: 1, ease: "power3.out" },
             );
         }
-        // Animate buttons with stagger
-        gsap.fromTo(
-            buttonsRef.current,
-            { opacity: 0, x: 40 },
-            {
-                opacity: 1,
-                x: 0,
-                duration: 0.8,
-                ease: "power3.out",
-                stagger: 0.15,
-                delay: 0.5,
-            },
-        );
     }, []);
 
     return (
@@ -52,40 +39,31 @@ export default function Contact() {
                         Thanks for stopping by! I’m always open to new
                         opportunities and connections.
                     </p>
-                    <a
-                        ref={(el) => {
-                            buttonsRef.current[0] = el;
-                        }}
-                        href="mailto:billwang7599@gmail.com"
-                        className="w-full flex items-center gap-3 px-6 py-3 rounded-lg text-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-200"
-                    >
-                        <FaEnvelope className="text-gray-600" />
-                        Email
-                    </a>
-                    <a
-                        ref={(el) => {
-                            buttonsRef.current[1] = el;
-                        }}
-                        href="https://linkedin.com/in/bw7599"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full flex items-center gap-3 px-6 py-3 rounded-lg text-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-200"
-                    >
-                        <FaLinkedin className="text-gray-600" />
-                        LinkedIn
-                    </a>
-                    <a
-                        ref={(el) => {
-                            buttonsRef.current[2] = el;
-                        }}
-                        href="https://github.com/billwang7599"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full flex items-center gap-3 px-6 py-3 rounded-lg text-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-200"
-                    >
-                        <FaGithub className="text-gray-600" />
-                        GitHub
-                    </a>
+                    <div className="flex flex-row gap-8">
+                        <SocialButton
+                            icon={FaEnvelope}
+                            label="Email"
+                            href="mailto:billwang7599@gmail.com"
+                            animationDelay={0.5}
+                            isFullWidth={true}
+                        />
+
+                        <SocialButton
+                            icon={FaLinkedin}
+                            label="LinkedIn"
+                            href="https://linkedin.com/in/bw7599"
+                            animationDelay={0.65}
+                            external={true}
+                        />
+
+                        <SocialButton
+                            icon={FaGithub}
+                            label="GitHub"
+                            href="https://github.com/billwang7599"
+                            animationDelay={0.8}
+                            external={true}
+                        />
+                    </div>
                 </div>
             </div>
             {/* Custom slow spin animation */}
@@ -101,5 +79,58 @@ export default function Contact() {
                 `}
             </style>
         </div>
+    );
+}
+
+// Social Button Component
+interface SocialButtonProps {
+    icon: IconType;
+    label: string;
+    href: string;
+    animationDelay?: number;
+    external?: boolean;
+    isFullWidth?: boolean;
+}
+
+function SocialButton({
+    icon: Icon,
+    label,
+    href,
+    animationDelay = 0,
+    external = false,
+    isFullWidth = false,
+}: SocialButtonProps) {
+    const buttonRef = useRef<HTMLAnchorElement>(null);
+
+    useEffect(() => {
+        // Animate button entrance
+        if (buttonRef.current) {
+            gsap.fromTo(
+                buttonRef.current,
+                { opacity: 0, x: 40 },
+                {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    ease: "power3.out",
+                    delay: animationDelay,
+                },
+            );
+        }
+    }, [animationDelay]);
+
+    return (
+        <a
+            ref={buttonRef}
+            href={href}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+            className={`group ${isFullWidth ? "w-full" : ""} flex items-center gap-3 hover:px-6 py-3 rounded-lg text-gray-700 hover:text-white hover:bg-gray-700 hover:shadow-lg transition-all duration-[0.7s]`}
+        >
+            <Icon className="w-8 h-8" />
+            <span className="max-w-0 text-lg overflow-hidden group-hover:max-w-[100px] whitespace-nowrap transition-all duration-[0.7s]">
+                {label}
+            </span>
+        </a>
     );
 }

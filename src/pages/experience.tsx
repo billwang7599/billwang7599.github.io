@@ -11,6 +11,29 @@ export function Experience() {
     const headingRef = useRef<HTMLHeadingElement>(null);
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
+    const experiences: Experience[] = [
+        {
+            title: "Software Engineer",
+            company: "Rocket Mortgage",
+            duration: "May 2025 - Aug 2025",
+        },
+        {
+            title: "Full Stack Developer",
+            company: "AllMind AI",
+            duration: "Sept 2024 - Dec 2024",
+        },
+        {
+            title: "Software Engineer",
+            company: "Huawei Technologies",
+            duration: "Feb 2023 - May 2023",
+        },
+        {
+            title: "Software Engineer",
+            company: "AdaptivePulse",
+            duration: "May 2022 - Aug 2022",
+        },
+    ];
+
     useEffect(() => {
         if (!headingRef.current) return;
         gsap.to(headingRef.current, {
@@ -42,29 +65,6 @@ export function Experience() {
             );
         });
     }, []);
-
-    const experiences: Experience[] = [
-        {
-            title: "Software Engineer",
-            company: "Rocket Mortgages",
-            duration: "May 2025 - Present",
-        },
-        {
-            title: "Full Stack Developer",
-            company: "AllMind AI",
-            duration: "Sept 2024 - Dec 2024",
-        },
-        {
-            title: "Software Engineer",
-            company: "Huawei Technologies",
-            duration: "Feb 2023 - May 2023",
-        },
-        {
-            title: "Software Engineer",
-            company: "AdaptivePulse",
-            duration: "May 2022 - Aug 2022",
-        },
-    ];
 
     return (
         <div className="w-full my-32 px-4">

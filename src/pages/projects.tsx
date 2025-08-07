@@ -106,7 +106,7 @@ export default function Projects() {
                         ref={(el) => {
                             cardsRef.current[idx] = el;
                         }}
-                        className="bg-white backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg overflow-hidden border border-gray-300 hover:scale-110 transition-transform duration-300 flex flex-col"
+                        className="bg-white backdrop-blur-md bg-opacity-60 rounded-xl shadow-lg overflow-hidden flex flex-col"
                     >
                         <div className="w-full h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
                             <a
@@ -130,6 +130,16 @@ export default function Projects() {
                                 {project.description}
                             </p>
                             <div className="flex gap-4 mt-auto">
+                                {project.link && (
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-gray-500 hover:text-gray-800 underline"
+                                    >
+                                        Project Site
+                                    </a>
+                                )}
                                 <a
                                     href={project.github}
                                     target="_blank"
@@ -138,16 +148,6 @@ export default function Projects() {
                                 >
                                     GitHub
                                 </a>
-                                {project.link && (
-                                    <a
-                                        href={project.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-gray-500 hover:text-gray-800 underline"
-                                    >
-                                        Live
-                                    </a>
-                                )}
                             </div>
                         </div>
                     </div>
