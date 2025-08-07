@@ -145,7 +145,7 @@ export default function Projects() {
                                         rel="noopener noreferrer"
                                         className="text-gray-500 hover:text-gray-800 underline"
                                     >
-                                        Live
+                                        Visit Site
                                     </a>
                                 )}
                             </div>

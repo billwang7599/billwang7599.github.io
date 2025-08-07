@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import jadePendant from "../assets/jade-pendant.png";
@@ -49,43 +49,51 @@ export default function Contact() {
                         Contact Me
                     </h2>
                     <p className="text-gray-500 text-lg font-light">
-                        Thanks for stopping by! I’m always open to new
+                        Thanks for stopping by! I'm always open to new
                         opportunities and connections.
                     </p>
-                    <a
-                        ref={(el) => {
-                            buttonsRef.current[0] = el;
-                        }}
-                        href="mailto:billwang7599@gmail.com"
-                        className="w-full flex items-center gap-3 px-6 py-3 rounded-lg text-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-200"
-                    >
-                        <FaEnvelope className="text-gray-600" />
-                        Email
-                    </a>
-                    <a
-                        ref={(el) => {
-                            buttonsRef.current[1] = el;
-                        }}
-                        href="https://linkedin.com/in/bw7599"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full flex items-center gap-3 px-6 py-3 rounded-lg text-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-200"
-                    >
-                        <FaLinkedin className="text-gray-600" />
-                        LinkedIn
-                    </a>
-                    <a
-                        ref={(el) => {
-                            buttonsRef.current[2] = el;
-                        }}
-                        href="https://github.com/billwang7599"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full flex items-center gap-3 px-6 py-3 rounded-lg text-gray-700 hover:scale-105 hover:shadow-lg transition-all duration-200"
-                    >
-                        <FaGithub className="text-gray-600" />
-                        GitHub
-                    </a>
+                    <div className="flex flex-col md:flex-row w-full gap-4">
+                        <a
+                            ref={(el) => {
+                                buttonsRef.current[0] = el;
+                            }}
+                            href="mailto:billwang7599@gmail.com"
+                            className="flex items-center gap-3 px-6 py-3 rounded-lg text-white hover:shadow-xl transition-all duration-300 relative group overflow-hidden min-w-[48px]"
+                        >
+                            <FaEnvelope className="text-black min-w-[20px]" />
+                            <span className="whitespace-nowrap text-black opacity-0 max-w-0 group-hover:max-w-[200px] group-hover:opacity-100 transition-all duration-300 overflow-hidden">
+                                billwang7599@gmail.com
+                            </span>
+                        </a>
+                        <a
+                            ref={(el) => {
+                                buttonsRef.current[1] = el;
+                            }}
+                            href="https://linkedin.com/in/bw7599"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 px-6 py-3 rounded-lg text-black hover:shadow-xl transition-all duration-300 relative group overflow-hidden min-w-[48px]"
+                        >
+                            <FaLinkedin className="text-white min-w-[20px]" />
+                            <span className="whitespace-nowrap text-white opacity-0 max-w-0 group-hover:max-w-[200px] group-hover:opacity-100 transition-all duration-300 overflow-hidden">
+                                LinkedIn
+                            </span>
+                        </a>
+                        <a
+                            ref={(el) => {
+                                buttonsRef.current[2] = el;
+                            }}
+                            href="https://github.com/billwang7599"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 px-6 py-3 rounded-lg bg-gray-700 text-white hover:shadow-xl transition-all duration-300 relative group overflow-hidden min-w-[48px]"
+                        >
+                            <FaGithub className="text-white min-w-[20px]" />
+                            <span className="whitespace-nowrap text-white opacity-0 max-w-0 group-hover:max-w-[200px] group-hover:opacity-100 transition-all duration-300 overflow-hidden">
+                                GitHub
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
             {/* Custom slow spin animation */}
@@ -98,6 +106,8 @@ export default function Contact() {
                 .animate-spin-slow {
                     animation: spin 30s linear infinite;
                 }
+
+
                 `}
             </style>
         </div>

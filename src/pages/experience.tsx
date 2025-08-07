@@ -46,7 +46,7 @@ export function Experience() {
     const experiences: Experience[] = [
         {
             title: "Software Engineer",
-            company: "Rocket Mortgages",
+            company: "Rocket Mortgage",
             duration: "May 2025 - Present",
         },
         {
