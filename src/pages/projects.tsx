@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
-import ancientChina from "../assets/ancient-china-bg.png";
+import ancientChina from "../assets/ancient-china-bg.webp";
 
 type Project = {
     title: string;
@@ -40,6 +40,12 @@ export default function Projects() {
                 "A anonymous tip jar built on Slack using Slack API, Fastify, and Fast API.",
             github: "https://github.com/billwang7599/EmotiBox",
             image: "/projects/emotibox.png",
+        },
+        {
+            title: "Zettle",
+            description: "AI powered second brain.",
+            github: "https://github.com/billwang7599/Zettle",
+            image: "/projects/secondbrain.png",
         },
     ];
 
@@ -118,7 +124,7 @@ export default function Projects() {
                                 <img
                                     src={project.image}
                                     alt={project.title}
-                                    className="object-cover object-left-top h-full w-full grayscale"
+                                    className="object-cover object-left-top h-full w-full grayscale lazyload"
                                 />
                             </a>
                         </div>

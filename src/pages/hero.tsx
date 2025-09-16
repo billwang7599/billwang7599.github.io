@@ -1,6 +1,6 @@
-import bgImage from "../assets/china-bg.png";
-import cloudImage1 from "../assets/clouds1.png";
-import fgImage from "../assets/china-fg.png";
+import bgImage from "../assets/china-bg.webp";
+import cloudImage1 from "../assets/clouds1.webp";
+import fgImage from "../assets/china-fg.webp";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 

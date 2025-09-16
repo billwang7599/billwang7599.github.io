@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
 import { IconType } from "react-icons";
-import jadePendant from "../assets/jade-pendant.png";
+import jadePendant from "../assets/jade-pendant.webp";
 
 export default function Contact() {
     const pendantRef = useRef<HTMLImageElement>(null);
@@ -21,7 +21,7 @@ export default function Contact() {
     return (
         <div className="min-h-screen flex flex-col md:flex-row items-center justify-center px-8 py-16">
             {/* Left: Spinning Jade Pendant */}
-            <div className="flex-1 flex items-center justify-center mb-8 md:mb-0">
+            <div className="flex-1 flex items-center justify-center mb-8 md:mb-0 lazyload">
                 <img
                     ref={pendantRef}
                     src={jadePendant}
