@@ -1,6 +1,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { ImBlogger } from "react-icons/im";
 import { IconType } from "react-icons";
 import jadePendant from "../assets/jade-pendant.webp";
 
@@ -60,6 +61,14 @@ export default function Contact() {
                             icon={FaGithub}
                             label="GitHub"
                             href="https://github.com/billwang7599"
+                            animationDelay={0.8}
+                            external={true}
+                        />
+
+                        <SocialButton
+                            icon={ImBlogger}
+                            label="Blog"
+                            href="https://blog.billwang.dev"
                             animationDelay={0.8}
                             external={true}
                         />
